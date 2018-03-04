@@ -25,29 +25,14 @@ class CellTests {
     }
 
     @Test
-    fun testNeighbourNum0and1() {
-        testCell.checkNeighbourNum(0)
-        assertFalse(testCell.isPopulated)
-        testCell.checkNeighbourNum(1)
-        assertFalse(testCell.isPopulated)
-    }
-
-    @Test
-    fun testNeighbourNum3() {
-        //making cell populated
-        testCell.checkNeighbourNum(3)
-        assertTrue(testCell.isPopulated)
-        //checking cell stays populated
-        testCell.checkNeighbourNum(3)
-        assertTrue(testCell.isPopulated)
-    }
-
-    @Test
-    fun testNeighbourNum2() {
-        testCell.checkNeighbourNum(2)
-        assertFalse(testCell.isPopulated)
+    fun testPrintOutPopulated() {
         testCell.isBorn()
-        testCell.checkNeighbourNum(2)
-        assertTrue(testCell.isPopulated)
+        assertEquals("*",testCell.printCell())
+    }
+
+    @Test
+    fun testPrintOutUnpopulated() {
+        testCell.dies()
+        assertEquals(" ",testCell.printCell())
     }
 }
