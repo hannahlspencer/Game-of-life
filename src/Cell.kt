@@ -5,7 +5,7 @@ class Cell(populated: Boolean = false, col: Int, row: Int) {
     private val rowPosition = row
 
 
-    fun isBorn() = {isPopulated = true}
+    fun isBorn() { isPopulated = true }
     fun dies() { isPopulated = false }
 
     fun getColumnPosition() = columnPosition;
