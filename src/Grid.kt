@@ -3,14 +3,29 @@ class Grid(startGrid: Array<Array<Cell>>) {
     var board = startGrid
     var tempBoard = board
 
-    override fun toString(): String {
-            println(" |" + board[0][0].printCell() + "|" + board[1][0].printCell() + "|" + board[2][0].printCell() + "|" + board[3][0].printCell())
-            println(" |" + board[0][1].printCell() + "|" + board[1][1].printCell() + "|" + board[2][1].printCell() + "|" + board[3][1].printCell())
-            println(" |" + board[0][2].printCell() + "|" + board[1][2].printCell() + "|" + board[2][2].printCell() + "|" + board[3][2].printCell())
-        return ""
+    fun printBoard() {
+
+        for(row in 0..board.size-1) {
+            print(" |")
+            for(col in 0..board[row].size-1) {
+                print(board[row][col].printCell() + " |")
+            }
+            println();
+
         }
 
+    }
+
     fun runTurn() {
+        for(arr in board) {
+            for(cell in arr) {
+                checkNeighbours(cell);
+                tempBoard[cell.getRowPosition()][cell.getColumnPosition()] = cell
+            }
+
+        }
+        board = tempBoard
+        printBoard()
 
     }
     fun checkNeighbours(cell : Cell) {
@@ -39,7 +54,7 @@ class Grid(startGrid: Array<Array<Cell>>) {
         cell.checkNeighbourNum(numNeighbors)
         println("Row =  ${cell.getRowPosition()}")
         println("Column = ${cell.getColumnPosition()}")
-        tempBoard[cell.getRowPosition()][cell.getColumnPosition()] = cell
+
     }
 
 }
