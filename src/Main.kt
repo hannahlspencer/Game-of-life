@@ -16,19 +16,24 @@ fun main(array: Array<String>) {
             arrayOf(Cell(true,0,2), Cell(true, 1,2), Cell(false, 2, 2)))
     )
 
-
+    //exit is true when user wants to exit game
     var exit = false
 
+    //check pattern to use
     startUp()
-
+    //prints initial board state
     game.printBoard()
+
+    //while user does not want to exit, offered another turn
     while(!exit) {
         exit = nextTurn(game)
     }
 }
-
+/*
+ * Asks user which pattern they'd like to see and validates choice
+ */
 fun startUp() {
-    println("Which pattern would you like to see? Select 1, 2, or 3")
+    println("Which pattern would you like to see? Select 1 or 2")
     var select = readLine()?.toInt()
     when(select) {
         1 -> game = pattern1
@@ -37,7 +42,9 @@ fun startUp() {
     }
 }
 
-
+/*
+ * Asks user if they want to keep going, validates choice, and runs next game turn if appropriate
+ */
 fun nextTurn(game: Grid) : Boolean {
     println("Do you want to see the next turn? Y/N")
     var answer = readLine()
@@ -47,8 +54,6 @@ fun nextTurn(game: Grid) : Boolean {
         "Y", "y" -> { println("OK"); game.runTurn() }
         else -> { println("Please type a Y or an N"); nextTurn(game) }
     }
-
     return exit
-
 }
 
