@@ -1,16 +1,14 @@
 import java.util.*
 
 fun main(array: Array<String>) {
-    var game = Grid(arrayOf(arrayOf(Cell(false,0,0), Cell(false, 1,0), Cell(false,2,0)),
+    var game = Grid(arrayOf(
+            arrayOf(Cell(false,0,0), Cell(false, 1,0), Cell(false,2,0)),
             arrayOf(Cell(true, 0,1), Cell(true, 1,1), Cell(true, 2,1)),
-            arrayOf(Cell(false,0,2), Cell(false, 1,2), Cell(false, 2, 2)),
-            arrayOf(Cell(true, 0,3), Cell(false, 1, 3), Cell(false, 2, 3)))
+            arrayOf(Cell(false,0,2), Cell(false, 1,2), Cell(false, 2, 2)))
     )
 
-    game.toString()
+    game.printBoard()
     nextTurn(game)
-
-    game.checkNeighbours(game.board[0][0])
 }
 
 
