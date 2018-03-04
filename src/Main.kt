@@ -7,20 +7,25 @@ fun main(array: Array<String>) {
             arrayOf(Cell(false,0,2), Cell(false, 1,2), Cell(false, 2, 2)))
     )
 
+    var exit = false
     game.printBoard()
-    nextTurn(game)
+    while(!exit) {
+        exit = nextTurn(game)
+    }
 }
 
 
-fun nextTurn(game: Grid) {
+fun nextTurn(game: Grid) : Boolean {
     println("Do you want to see the next turn? Y/N")
     var answer = readLine()
-
+    var exit = false;
     when(answer) {
-        "N", "n" -> println("Thanks for playing the Game of Life!")
+        "N", "n" -> { println("Thanks for playing the Game of Life!"); exit = true }
         "Y", "y" -> { println("OK"); game.runTurn() }
         else -> { println("Please type a Y or an N"); nextTurn(game) }
     }
+
+    return exit
 
 }
 
