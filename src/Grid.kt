@@ -1,14 +1,17 @@
+import java.util.*
+import java.util.Arrays.copyOf
+
 class Grid(startGrid: Array<Array<Cell>>) {
 
     var board = startGrid
-    var tempBoard = board
+    var tempBoard = Arrays.copyOf(board, board.size)
 
     fun printBoard() {
 
-        for(row in 0..board.size-1) {
+        for(row in 0..tempBoard.size-1) {
             print(" |")
-            for(col in 0..board[row].size-1) {
-                print(board[row][col].printCell() + " |")
+            for(col in 0..tempBoard[row].size-1) {
+                print(tempBoard[row][col].printCell() + " |")
             }
             println();
 
@@ -17,18 +20,36 @@ class Grid(startGrid: Array<Array<Cell>>) {
     }
 
     fun runTurn() {
-        for(arr in board) {
-            for(cell in arr) {
-                checkNeighbours(cell);
-                tempBoard[cell.getRowPosition()][cell.getColumnPosition()] = cell
-            }
-
-        }
-        board = tempBoard
+        cellDecision()
+       // board = tempBoard
         printBoard()
 
     }
-    fun checkNeighbours(cell : Cell) {
+
+    fun cellDecision() {
+        for(arr in board) {
+            for(cell in arr) {
+                var neighbourNum = checkNeighbours(cell);
+                var currentRow = cell.getRowPosition();
+                var currentCol = cell.getColumnPosition()
+                var tempCell = tempBoard[currentRow][currentCol]
+
+                if(cell.isPopulated) {
+                    if(neighbourNum < 2 || neighbourNum > 3) {
+                        println("Cell dies")
+                        tempCell.dies()
+                    }
+                } else {
+                    if(neighbourNum === 3) {
+                        println("A cell is born *")
+                        tempCell.isBorn()
+                    }
+                }
+            }
+
+        }
+    }
+    fun checkNeighbours(cell : Cell) : Int{
         var numNeighbors = 0
         var column = cell.getColumnPosition()
         var row = cell.getRowPosition()
@@ -51,9 +72,10 @@ class Grid(startGrid: Array<Array<Cell>>) {
         // Up
         if (row - 1 >= 0 && column < board[0].size && board[row - 1][column].isPopulated) numNeighbors += 1
 
-        cell.checkNeighbourNum(numNeighbors)
         println("Row =  ${cell.getRowPosition()}")
         println("Column = ${cell.getColumnPosition()}")
+        println("Neighbours = $numNeighbors")
+        return numNeighbors
 
     }
 
