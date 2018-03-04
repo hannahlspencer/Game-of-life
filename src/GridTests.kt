@@ -1,6 +1,5 @@
 import org.junit.Before
 import org.junit.Test
-import kotlin.math.exp
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
