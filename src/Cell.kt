@@ -1,7 +1,9 @@
-class Cell(populated: Boolean = false, x: Int, y: Int) {
+class Cell(populated: Boolean = false, col: Int, row: Int) {
     var isPopulated = populated
-    val positionX = x
-    val positionY = y
+    //var neighbourNum = 0;
+    private final val columnPosition = col
+    private final val rowPosition = row
+
     //val neighbours: List<Cell>
 
     fun isBorn() {
@@ -12,16 +14,27 @@ class Cell(populated: Boolean = false, x: Int, y: Int) {
         isPopulated = false
     }
 
+    fun getColumnPosition() = columnPosition;
+    fun getRowPosition() = rowPosition
+
     fun printCell(): String {
         var toPrint = " ";
         if (isPopulated) toPrint = "*" else toPrint = " "
         return toPrint
     }
 
-    fun checkNeighbours() {
-        //if < 2 neighbours dies()
-        //if > 3 neighbours dies()
-        //if (while isPopulated) 2/3 neighbours - no change
-        //if(while !isPopulated) 3 neighbours isBorn()
+    fun checkNeighbourNum(neighbourNum: Int) {
+        println("Number of neighbours is: $neighbourNum")
+        if(isPopulated) {
+            if(neighbourNum < 2 || neighbourNum > 3) {
+                println("Cell dies")
+                dies()
+            }
+        } else {
+            if(neighbourNum === 3) {
+                println("A cell is born *")
+                isBorn()
+            }
+        }
     }
 }
