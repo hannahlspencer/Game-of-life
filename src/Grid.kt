@@ -1,4 +1,3 @@
-import java.util.*
 
 class Grid(startGrid: Array<Array<Cell>>) {
 
@@ -37,28 +36,22 @@ class Grid(startGrid: Array<Array<Cell>>) {
         var toBirth = mutableListOf<Cell>()
         for(arr in board) {
             for(cell in arr) {
-                //finds the number of neighbours for each cell
-                var neighbourNum = checkNeighbours(cell);
-
-                //makes decision based on number of neighbours and whether cell is populated
+                val neighbourNum = checkNeighbours(cell);
                 if(cell.isPopulated) {
                     if(neighbourNum < 2 || neighbourNum > 3) {
                         toDie.add(cell)
                     }
                 } else {
-                    if(neighbourNum === 3) {
+                    if(neighbourNum == 3) {
                         toBirth.add(cell)
                     }
                 }
             }
         }
-        //feeds cells to kill or birth into killOrBirth method
         killOrBirthCells(toDie, toBirth)
     }
 
-    /*
-     * Takes two lists that are assigned whether they are cells to kill or to birth
-     * Kills or births cells accordingly
+    /* takes two lists of cells, one to kill and one to birth
      * @params: List<Cell>, List<Cell>
      */
     fun killOrBirthCells(toDie : List<Cell>, toBirth: List<Cell>) {
@@ -70,15 +63,14 @@ class Grid(startGrid: Array<Array<Cell>>) {
         }
     }
 
-    /*
-     * Checks each of the cell's neighbours on the board one by one
-     * @param: Cell being checked
-     * @returns: number of neighbours that cell has
+    /* Takes a cell and checks which of its neighbours are populated, one by one
+     * @params: Cell
+     * @returns: Int - number of neighbours the cell has
      */
     fun checkNeighbours(cell : Cell) : Int{
         var numNeighbors = 0
-        var column = cell.getColumnPosition()
-        var row = cell.getRowPosition()
+        val column = cell.getColumnPosition()
+        val row = cell.getRowPosition()
 
 
         // Up Left
@@ -103,8 +95,8 @@ class Grid(startGrid: Array<Array<Cell>>) {
     }
 
     /*
-     * overrides toString method to allow for testing
-     * @returns: String representation of the board
+     * toString method for testing purposes
+     * @return: string representation of board
      */
     override fun toString(): String {
         var str = ""
